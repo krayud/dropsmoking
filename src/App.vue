@@ -6,7 +6,7 @@ import logoImg from '@/assets/imgs/logo.png';
 
 <template>
   <div class="main-wrapper">
-    <header><img :src="logoImg"/></header>
+    <header><img :src="logoImg" alt="DropSmoking.ru logo"/></header>
     <main><RouterView /></main>
     <footer>2023</footer>
   </div>

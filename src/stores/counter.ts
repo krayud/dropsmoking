@@ -24,10 +24,14 @@ export const useCounterStore = defineStore('counter', () => {
   };
 
   const startFromtDate = (newStartDate) => {
+    resetStartTime(newStartDate);
+    runTimer();
+  };
+
+  const resetStartTime = (newStartDate) => {
     userStoredTime.value = newStartDate;
     currentTime.value = dayjs().format();
     localStorage.setItem('start-date', userStoredTime.value);
-    runTimer();
   };
 
   if (isTimerStarted.value) {
@@ -46,5 +50,5 @@ export const useCounterStore = defineStore('counter', () => {
     return { days: days | 0, hours: hours | 0, min: min | 0, sec: sec | 0, totalSecDifferent: totalSecDifferent | 0, savedMoney };
   });
 
-  return { timer, startFromtDate, isTimerStarted }
+  return { timer, startFromtDate, resetStartTime, isTimerStarted }
 })

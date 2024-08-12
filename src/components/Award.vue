@@ -30,16 +30,26 @@ const calcPercent = () => {
 const isCompleted = ref(calcPercent() >= 100);
 
 const completePercents = computed(() => {
-  if (!isCompleted.value) {
+  // if (!isCompleted.value) {
     const newPercents = calcPercent();
     if(newPercents > 100) {
       isCompleted.value = true;
+    } else {
+      isCompleted.value = false;
     }
     return newPercents <= 100 ? newPercents : 100;
-  } else {
-    return 100;
-  }
-})
+  // } else {
+  //   return 100;
+  // }
+});
+
+const bgColor = computed(() => {
+  return !isCompleted.value ? '#D07AFF' : '#CEFF40';
+});
+
+const percentsColor = computed(() => {
+  return !isCompleted.value ? '#ffffff' : '#323232';
+});
 
 </script>
 
@@ -78,10 +88,10 @@ const completePercents = computed(() => {
 
     &__progress {
       position: absolute;
-      top: 0px;
+      top: 0;
       height: 16px;
       border-radius: 6px;
-      background-color: var(--green);
+      background-color: v-bind(bgColor);
     }
 
     &__percents {
@@ -92,7 +102,7 @@ const completePercents = computed(() => {
       font-size: 12px;
       text-align: center;
       width: 100%;
-      color: #323232;
+      color: v-bind(percentsColor);
     }
   }
 
